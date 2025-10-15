@@ -1,12 +1,22 @@
-# Course Work
+# Course Work - Student Database
 
-### Structure - 17.10
-### Database - 22.10
-### Cli input - 29.10
-### Makefiles - 5.10
+## Project Milestones
 
-# Libraries that we will use:
+- **Structure** - 17.10.2025
+- **Database** - 22.10.2025
+- **CLI Input** - 29.10.2025
+- **Makefile** - 05.11.2025
 
-### stdlib
-### stdio
-### math
+## Libraries Used
+
+- `stdlib` - Memory allocation and utilities
+- `stdio` - Input/output operations
+- `string` - String manipulation
+
+## Features
+
+- Student structure with name, surname, group, and age
+- Sorting functionality (by name, surname, group, age)
+- Dynamic and static array support
+- Save/load student data to/from files
+- Command-line interface for adding students
