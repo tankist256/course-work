@@ -11,7 +11,6 @@
 
 - `stdlib` - Memory allocation and utilities
 - `stdio` - Input/output operations
-- `string` - String manipulation
 
 ## Features
 
