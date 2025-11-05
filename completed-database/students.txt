@@ -1,0 +1,5 @@
+student,student1,12,1,mail@mail.com,+123000000,2000-20-02,PX23,4.00
+student2,student2.1,134,2,mail2@mail.com,+123000011,2000-07-12,PX-24,3.70
+student2,student3.1,134,3,mail3@mail.com,+123000022,2054-11-23,PX-23,1.60
+student2,student4.1,134,4,mail4@mail.com,+123000033,2022-12-31,PX-24,2.20
+student2,stude5.1,134,5,mail5@mail.com,+123000044,2012-05-28,PX-23,3.20
