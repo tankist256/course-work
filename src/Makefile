@@ -1,7 +1,5 @@
-# Student Database Management System
 CC      := gcc
 CFLAGS  := -Wall -Wextra -std=c11 -I../include
-LDFLAGS :=
 
 SRC_DIR   := .
 INC_DIR   := ../include
@@ -21,15 +19,13 @@ OBJECTS := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o, \
            $(patsubst $(INC_DIR)/%.c,$(BUILD_DIR)/%.o, \
              $(filter $(INC_DIR)/%.c,$(SOURCES)))
 
-# Rules
-.PHONY: all clean rebuild run
+.PHONY: all clean
 
 all: dirs $(TARGET)
 
 dirs:
 	@mkdir -p $(BUILD_DIR) $(BIN_DIR)
 
-# Link
 $(TARGET): $(OBJECTS)
 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 
@@ -38,11 +34,6 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(BUILD_DIR)/%.o: $(INC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
-# Helper targets
-clean:
+
+clean: 
 	rm -rf $(BUILD_DIR) $(BIN_DIR)
-
-rebuild: clean all
-
-run: all
-	$(TARGET)

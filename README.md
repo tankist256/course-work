@@ -15,7 +15,29 @@
 ## Features
 
 - Student structure with name, surname, group, and age
-- Sorting functionality (by name, surname, group, age)
+- Sorting functionality (by name, group, age, GPA)
 - Dynamic and static array support
-- Save/load student data to/from files
-- Command-line interface for adding students
+- Save/load student/parents data to/from files
+- Command-line interface for manipulations with students/parents
+
+## Usage
+
+```bash
+> git clone https://github.com/tankist256/course-work.git
+> cd course-work
+```
+
+### Run program
+
+```bash
+> cd src/
+> make 
+> cd ..
+> cd bin/
+> ./program
+```
+
+### Check functionality
+
+- from dir `completed-database/` copy `parents.txt` and `students.txt`
+- paste copied files to dir `bin/`
