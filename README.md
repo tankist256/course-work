@@ -41,3 +41,56 @@
 
 - from dir `completed-database/` copy `parents.txt` and `students.txt`
 - paste copied files to dir `bin/`
+
+### Project before make
+
+```
+course-work
+├─ README.md
+├─ completed-database
+│  ├─ parents.txt
+│  └─ students.txt
+├─ include
+│  ├─ database.c
+│  ├─ database.h
+│  ├─ mystring.c
+│  ├─ mystring.h
+│  ├─ parents.c
+│  ├─ parents.h
+│  ├─ sorts.c
+│  └─ sorts.h
+└─ src
+   ├─ Makefile
+   └─ main.c
+
+```
+---
+### Project after make
+```
+course-work
+├─ README.md
+├─ bin
+│  └─ program
+├─ completed-database
+│  ├─ parents.txt
+│  └─ students.txt
+├─ include
+│  ├─ database.c
+│  ├─ database.h
+│  ├─ mystring.c
+│  ├─ mystring.h
+│  ├─ parents.c
+│  ├─ parents.h
+│  ├─ sorts.c
+│  └─ sorts.h
+└─ src
+   ├─ Makefile
+   ├─ build
+   │  ├─ database.o
+   │  ├─ main.o
+   │  ├─ mystring.o
+   │  ├─ parents.o
+   │  └─ sorts.o
+   └─ main.c
+
+```
