@@ -1,0 +1,7 @@
+fa0ce3ba-743e-4f6f-a93f-9b0f48a8bb65|NVIDIA Corporation|United States|4|1993|https://www.nvidia.com|36
+5dd40cae-3d67-46b4-9d86-7b791c0a0f0f|Advanced Micro Devices|United States|5|1969|https://www.amd.com|36
+1f5d0e1e-dab5-4c10-8f2f-cbf9b7a7dd4b|Intel Corporation|United States|7|1968|https://www.intel.com|36
+89f1a7bd-4a52-4f04-9a38-13f9a1ed699a|Samsung Electronics|South Korea|1|1969|https://www.samsung.com|60
+bde2723b-aba8-4f7f-9991-9d8696d7f90d|ASUS|Taiwan|4|1989|https://www.asus.com|36
+c6d1f092-9d1e-4fd8-93b2-6f6f5d977708|Corsair Components|United States|1|1994|https://www.corsair.com|60
+0cd9d548-8160-4e0f-b226-2a02aa0ecf22|Micro-Star International|Taiwan|8|1986|https://www.msi.com|36
