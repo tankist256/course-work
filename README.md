@@ -57,7 +57,7 @@ course-work
 │  ├─ mystring.h
 │  ├─ parents.c
 │  ├─ parents.h
-│  ├─ sorts.c
+│  ├─ sorts.crR
 │  └─ sorts.h
 └─ src
    ├─ Makefile
