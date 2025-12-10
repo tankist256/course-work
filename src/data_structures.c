@@ -169,6 +169,7 @@ int inventory_add_manufacturer(
     char out_uuid[UUID_STR_LEN]
 ){
     char tmp[UUID_STR_LEN]; uuid_generate(tmp);
+    while(find_product_index(inv, tmp) >= 0) uuid_generate(tmp);
     while(find_manufacturer_index(inv, tmp) >= 0) uuid_generate(tmp);
     if(!ensure_manufacturers_capacity(inv, inv->manufacturers_count+1)) return 0;
     Manufacturer m; m.uuid=NULL; m.name=NULL; m.country=NULL; m.website=NULL; m.warranty_months=warranty_months; m.established.month=month; m.established.year=year;
@@ -189,6 +190,7 @@ int inventory_add_category(
     char out_uuid[UUID_STR_LEN]
 ){
     char tmp[UUID_STR_LEN]; uuid_generate(tmp);
+    while(find_category_index(inv, tmp) >= 0) uuid_generate(tmp);
     if(!ensure_categories_capacity(inv, inv->categories_count+1)) return 0;
     Category c; c.uuid=NULL; c.name=NULL; c.description=NULL; c.total_products_count=0; c.product_uuids=NULL; c.product_uuids_count=0; c.product_uuids_capacity=0;
     c.uuid = dup_uuid_buf(tmp);
@@ -307,14 +309,16 @@ int inventory_update_product_price(Inventory* inv, char* uuid, float price){
 int inventory_update_manufacturer(Inventory* inv, char* uuid, char* name, char* country, int month, int year, char* website, int warranty_months){
     int i = find_manufacturer_index(inv, uuid); if(i<0) return 0;
     Manufacturer* m = &inv->manufacturers[i];
-    char* n = str_dup(name);
-    char* c = str_dup(country);
-    char* w = str_dup(website);
-    if((name && !n) || (country && !c) || (website && !w)) { if(n)free(n); if(c)free(c); if(w)free(w); return 0; }
-    if(m->name) free(m->name); m->name = n;
-    if(m->country) free(m->country); m->country = c;
-    if(m->website) free(m->website); m->website = w;
-    m->established.month = month; m->established.year = year; m->warranty_months=warranty_months;
+    char* n = NULL; char* c = NULL; char* w = NULL;
+    if(name){ n = str_dup(name); if(!n) return 0; }
+    if(country){ c = str_dup(country); if(!c){ if(n) free(n); return 0; } }
+    if(website){ w = str_dup(website); if(!w){ if(n) free(n); if(c) free(c); return 0; } }
+    if(name){ if(m->name) free(m->name); m->name = n; }
+    if(country){ if(m->country) free(m->country); m->country = c; }
+    if(website){ if(m->website) free(m->website); m->website = w; }
+    if(month>0) m->established.month = month;
+    if(year>0) m->established.year = year;
+    if(warranty_months>0) m->warranty_months = warranty_months;
     return 1;
 }
 

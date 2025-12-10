@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "../headers/data_structures.h"
 #include "../headers/technical_requirements.h"
-#include "../headers/special_challenges.h"
 #include "../headers/cli.h"
 
 static char* next_val(int argc, char** argv, int i){

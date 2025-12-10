@@ -22,7 +22,7 @@ int add_product_uuid_to_category(Inventory* inv, char* category_uuid, char* prod
     if(ci<0) return 0;
     if(find_product_index(inv, product_uuid)<0) return 0;
     Category* c = &inv->categories[ci];
-    int i; for(i=0;i<c->product_uuids_count;i++){ if(str_cmp(c->product_uuids[i], product_uuid)==0) { c->total_products_count++; return 1; } }
+    int i; for(i=0;i<c->product_uuids_count;i++){ if(str_cmp(c->product_uuids[i], product_uuid)==0) { return 1; } }
     if(!ensure_category_uuid_capacity(c, c->product_uuids_count+1)) return 0;
     char* d = str_dup(product_uuid); if(!d) return 0;
     c->product_uuids[c->product_uuids_count++] = d;
@@ -36,7 +36,7 @@ int remove_product_uuid_from_category(Inventory* inv, char* category_uuid, char*
     Category* c=&inv->categories[ci];
     int i,found=-1;
     for(i=0;i<c->product_uuids_count;i++){ if(str_cmp(c->product_uuids[i], product_uuid)==0){ found=i; break; } }
-    if(found<0){ if(c->total_products_count>0) c->total_products_count--; return 1; }
+    if(found<0){ return 1; }
     if(c->product_uuids[found]){ free(c->product_uuids[found]); }
     for(i=found+1;i<c->product_uuids_count;i++) c->product_uuids[i-1]=c->product_uuids[i];
     c->product_uuids_count--;
