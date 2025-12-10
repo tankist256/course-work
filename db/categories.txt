@@ -1,0 +1,6 @@
+d2fef7b3-4a1e-4c15-9c05-b7e0f1b7c001|Graphics Cards|Dedicated desktop graphics cards for 4K gaming|3|3|9e7f9eec-58f3-4bb1-a0b6-0b5632d6da01|ad1fd63d-d7bb-4a2b-8c17-93ce061ba302|5f1e4b9e-a04d-43b9-9b8b-2d21962c6d12
+cdd0e3c9-b466-4d07-9d8b-0e8da0a2a111|Processors|Enthusiast desktop CPUs with 12+ cores|2|2|1a403e9f-7f3b-4d9c-9bba-cc7f84a50613|8f6b6457-cc08-41e3-9c84-5a9d04aa12d2
+60b2fbb5-813e-4af3-8388-a4239e409b3e|Motherboards|ATX platforms with PCIe 5.0 and DDR5 support|2|2|dd3e37d2-90e9-4708-9f2b-1d0261f4926a|9de7ccd8-3f2d-4c07-9fd1-25d4a3ac91bc
+2b39d816-6f72-4cc7-a23a-30bfb5c54024|Storage|PCIe NVMe solid state drives|3|3|c7fb9180-83a4-4c44-9a56-13b4b7c7f9fb|ef9f8465-3a31-4a91-9b6f-787c620d9f70|e05f822a-eeb1-4a52-9d2e-b7f8c674aa64
+b5e1355e-1a3a-4c68-9e77-81278a63df59|Memory|DDR5 dual-channel performance kits|1|1|2a3f6fd0-5511-4cd0-8e07-58f59147ab67
+4a7d2fb2-918d-4f73-b61a-a39cb3b2d5cb|Power Supplies|ATX 3.0 and SFX-L fully modular PSUs|2|2|1db9ea73-3d32-4937-845a-5d9b80ebd26d|eb3f27a9-6d7f-4c5a-92da-77b597c787fc

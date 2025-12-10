@@ -1,0 +1,259 @@
+## Computer Hardware Store Inventory System
+
+### Overview
+Create a command-line interface application to manage a computer hardware store inventory. The system should handle products, manufacturers, and categories. **All data must be stored in dynamically allocated arrays, including all strings and nested arrays within structures.**
+
+### Required Data Structures
+
+#### 1. Manufacturer Structure
+Must contain:
+- UUID (37 characters)
+- Company name (dynamically allocated string)
+- Headquarters country (dynamically allocated string)
+- Established date (nested struct with month, year)
+- Website URL (dynamically allocated string)
+- Standard warranty period in months (integer)
+
+#### 2. Category Structure
+Must contain:
+- UUID (37 characters)
+- Category name (dynamically allocated string: GPU, CPU, RAM, Motherboard, etc.)
+- Description (dynamically allocated string)
+- Total products count (integer)
+- **Dynamically allocated array of product UUIDs belonging to this category**
+- Count and capacity for the product UUID array
+
+#### 3. Product Structure
+Must contain:
+- UUID (37 characters)
+- Model name (dynamically allocated string)
+- Manufacturer UUID reference (37 characters)
+- Category UUID reference (37 characters)
+- SKU (dynamically allocated string)
+- Price (float)
+- Stock quantity (integer)
+- Release date (nested struct with month, year)
+- Specifications (nested struct):
+  - Performance score (1-100 integer)
+  - Power consumption in watts (integer)
+  - Interface type (dynamically allocated string: PCIe, DDR4, SATA, etc.)
+- Warranty period in months (integer)
+- **Dynamically allocated array of related accessory UUIDs**
+- Count and capacity for accessory array
+
+#### 4. Inventory Management Structures
+Must contain:
+- Manufacturers: pointer to dynamic array, count, capacity
+- Categories: pointer to dynamic array, count, capacity
+- Products: pointer to dynamic array, count, capacity
+
+### Dynamic Memory Requirements
+
+**Critical Requirement**: You must dynamically allocate:
+1. All strings in all structures
+2. Arrays of product UUIDs within Category structure
+3. Arrays of accessory UUIDs within Product structure
+4. Main arrays for manufacturers, categories, and products
+
+When adding a category:
+- Allocate memory for name and description strings
+- Initialize product UUID array with small capacity
+- Grow UUID array when products are added to category
+
+When adding a product:
+- Allocate memory for all string fields
+- Initialize accessory UUID array with small capacity
+- Add product UUID to appropriate category's UUID array (may trigger growth)
+
+### Required Functionality
+
+#### Command-Line Interface
+1. **Help System**
+   - Display comprehensive help with --help
+   - Display usage summary without arguments
+
+2. **Add Operations**
+   - Add manufacturer with all fields
+   - Add category with name and description
+   - Add product with all fields and references
+   - Link product to category (updates category's product UUID array)
+   - Add accessory relationship (updates product's accessory array)
+
+3. **Delete Operations**
+   - Delete product by UUID
+   - Delete manufacturer by UUID (warn if products exist)
+   - Delete category by UUID (warn if products exist)
+   - **Free all string memory and nested arrays in deleted record**
+   - **Remove UUID from category's product list when deleting product**
+
+4. **Update Operations**
+   - Update product stock quantity
+   - Update product price
+   - Update manufacturer information (reallocate strings)
+   - Add/remove accessory relationships (modify dynamic UUID array)
+
+5. **List Operations**
+   - List all products with complete details
+   - List all manufacturers
+   - List all categories with product count
+   - List products below stock threshold
+   - List accessories for a given product
+
+6. **Filter Operations**
+   - Filter by category UUID
+   - Filter by manufacturer UUID
+   - Filter by price range (min and max)
+   - Filter by performance score range
+   - Filter by maximum power consumption
+   - Filter by interface type
+   - **All filters create new dynamic arrays**
+
+7. **Sort Operations**
+   - Sort by price
+   - Sort by performance score
+   - Sort by power consumption
+   - Sort by stock quantity
+   - Sort by model name (alphabetically)
+   - **Must handle any array size**
+
+8. **Combined Operations**
+   - Chain multiple filters with one sort
+   - Example: Filter GPUs from specific manufacturer, then sort by price
+
+9. **Special Operations**
+   - Search products by model name (substring matching)
+   - List all products in a category (using category's UUID array)
+   - Show product recommendations (using accessory array)
+
+### Technical Requirements
+
+#### 1. Dynamic String Management
+- Allocate exact memory for each string based on input length
+- Free all string memory when deleting or updating records
+- Reallocate when updating string fields
+- Handle allocation failures gracefully
+
+#### 2. Nested Dynamic Arrays
+- Category structure contains dynamic array of product UUIDs:
+  - Initialize with small capacity when creating category
+  - Grow when adding products to category
+  - Shrink when removing products (optional)
+  - Update when products are deleted
+- Product structure contains dynamic array of accessory UUIDs:
+  - Initialize with small capacity
+  - Grow when adding accessory relationships
+  - Handle accessory additions and removals
+
+#### 3. Main Dynamic Arrays Management
+- All inventory arrays start with small capacity
+- Implement automatic growth (double when full)
+- Implement optional shrinking (halve when 25% full)
+- Safe reallocation with error checking
+
+#### 4. String Operations (No string.h)
+Implement:
+- String length
+- String comparison (case-sensitive)
+- String comparison (case-insensitive for search)
+- String copy
+- Substring search (for model name search)
+
+#### 5. Number Conversion (No atoi/atof)
+Implement:
+- String to integer
+- String to float (with decimal handling)
+- Input validation
+- Error detection
+
+#### 6. UUID Management
+- Generate unique UUIDs
+- Validate UUID format
+- Check for duplicates
+
+#### 7. Data Persistence
+- Save to separate files: manufacturers.dat, categories.dat, products.dat
+- Format must preserve:
+  - All string data
+  - All UUID relationships
+  - Category product lists
+  - Product accessory lists
+- Load on startup:
+  - Allocate all arrays dynamically
+  - Allocate all strings individually
+  - Reconstruct relationships
+
+#### 8. Relational Integrity
+- Verify manufacturer exists before adding product
+- Verify category exists before adding product
+- Update category's product list when adding product
+- Update category's product list when deleting product
+- Verify product exists before adding accessory relationship
+- Handle cascading updates
+
+#### 9. Error Handling
+Handle all cases:
+- Memory allocation failures at any level (arrays, strings, nested arrays)
+- Invalid arguments
+- File errors
+- Duplicate SKUs
+- Invalid UUIDs
+- Invalid relationships
+
+#### 10. Memory Management
+Implement comprehensive cleanup:
+- Free all strings in all structures
+- Free all nested UUID arrays in categories and products
+- Free main inventory arrays
+- Clean up on errors (no leaks even during failures)
+- Implement cleanup function for each structure type
+
+### Special Challenges for This Task
+
+**Category-Product Relationship**: When you add a product to a category, you must:
+1. Add product to main product inventory
+2. Add product's UUID to category's dynamic product UUID array (may need to expand array)
+3. Increment category's product count
+
+**Product Deletion**: When deleting a product, you must:
+1. Remove product UUID from category's UUID array (shift remaining UUIDs)
+2. Decrement category's product count
+3. Consider shrinking category's UUID array if it becomes sparse
+4. Free all product strings and nested arrays
+5. Remove product from main inventory
+
+**Accessory Relationships**: Products can have relationships with other products (accessories). You must:
+1. Maintain dynamic array of accessory UUIDs in each product
+2. Allow adding/removing accessory relationships
+3. Validate that accessory UUIDs reference existing products
+4. Display recommendations based on accessory array
+
+### Sample Required Functions
+
+You must implement functions for:
+- Initialize inventory system (all three inventories)
+- Add manufacturer (allocate strings)
+- Add category (allocate strings and UUID array)
+- Add product (allocate strings, arrays, and update category)
+- Delete manufacturer (free all memory)
+- Delete category (free strings and UUID array)
+- Delete product (free strings, arrays, and update category)
+- Add product to category's list
+- Remove product from category's list
+- Add accessory relationship
+- Remove accessory relationship
+- Search in dynamic arrays
+- Filter creating new dynamic arrays
+- Sort dynamic arrays
+- Free entire inventory system
+
+### Grading Criteria
+- Correct struct implementation with all dynamic elements (20%)
+- Dynamic array implementation for inventories (15%)
+- Nested dynamic arrays (category products, product accessories) (15%)
+- Proper argc/argv parsing (10%)
+- Add/Delete/Update with complete memory management (15%)
+- Filter and sort operations (10%)
+- Custom string/number functions (10%)
+- Zero memory leaks with complex nested structures (5%)
+
+---
